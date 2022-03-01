@@ -3,7 +3,7 @@ import random
 
 
 class Walker2d:
-    def __init__(self, number_of_particles, all_start_location, move=None, handle_boundary=None):
+    def __init__(self, number_of_particles, all_start_location=(0,0), move=None, handle_boundary=None):
         self.location_counts = Counter()
         self.location_counts[all_start_location] = number_of_particles
         self.move = move

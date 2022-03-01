@@ -7,9 +7,9 @@ from Walker2d import Walker2d
 GRID_COLS = 250
 GRID_ROWS = 250
 GRID_ALL_START_LOCATION = (GRID_COLS // 2, GRID_ROWS // 2)
+CELL_DISPLAY_SIZE = 3
 
 NUMBER_OF_PARTICLES = 1024
-CELL_DISPLAY_SIZE = 3
 
 class TkWalker2d:
     def __init__(self, canvas, color):
@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     root.title("Diffusion Simulated by Random Walk")
-    root.resizable(0,0)
+    root.resizable(False, False)
     root.wm_attributes("-topmost", 1)
 
     canvas = tk.Canvas(root, width=GRID_COLS*CELL_DISPLAY_SIZE, height=GRID_ROWS*CELL_DISPLAY_SIZE, bd=0, highlightthickness=0)
