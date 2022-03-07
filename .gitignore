@@ -1,3 +1,15 @@
+# NOTE derived from:
+# https://raw.githubusercontent.com/racket/typed-racket/master/.gitignore
+# on 2022-03-06
+compiled/
+*~
+\#*
+.#*
+.bak
+
+# MacOS-specific
+.DS_Store
+
 # NOTE copy-paste of:
 # https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore
 # on 2020-12-27
