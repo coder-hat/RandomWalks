@@ -17,7 +17,7 @@ function randomInt(upperBound) {
 }
 
 function randomShift(i) {
-    return i + (randomInt(2) - 1);
+    return i + (randomInt(3) - 1);
 }
 
 function newLocation(loc) {
