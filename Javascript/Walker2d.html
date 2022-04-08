@@ -23,7 +23,7 @@ const PARTICLE_COUNT = 1024;
 
 const CELL_SIZE_PIXELS = 3;
 
-function drawParticles(locationCounts) {
+function drawParticles(locationCounts, colorText) {
     let c = document.getElementById("myCanvas");
     let ctx = c.getContext("2d");
     locationCounts.forEach((curLoc) => {
@@ -31,19 +31,24 @@ function drawParticles(locationCounts) {
         px = curLoc.x * CELL_SIZE_PIXELS;
         py = curLoc.y * CELL_SIZE_PIXELS;
         ctx.rect(px, py, CELL_SIZE_PIXELS, CELL_SIZE_PIXELS);
-        ctx.fillStyle = "red";
+        ctx.fillStyle = colorText;
         ctx.fill();
     });
+}
+
+function gameLoop(timeStamp) {
+    drawParticles(locationCounts, "white");
+    locationCounts = doStep(locationCounts);
+    drawParticles(locationCounts, "red");
+
+    window.requestAnimationFrame(gameLoop);
 }
 
 var locationCounts = new Map();
 initialLocation = new LocationCount(GRID_CENTER_X, GRID_CENTER_Y, PARTICLE_COUNT);
 locationCounts.set(initialLocation.key(), initialLocation);
 
-for (let i=0; i < 128; i += 1) {
-    locationCounts = doStep(locationCounts);
-    drawParticles(locationCounts);
-}
+window.requestAnimationFrame(gameLoop);
 
 document.getElementById("gridWide").innerHTML = GRID_CELL_WIDE;
 document.getElementById("gridHigh").innerHTML = GRID_CELL_HIGH;

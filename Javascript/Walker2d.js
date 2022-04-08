@@ -1,5 +1,3 @@
-// Can try out code on online with:
-// https://www.onlinegdb.com/online_javascript_rhino_interpreter
 
 class LocationCount {
     constructor(x, y, count) {
@@ -62,3 +60,14 @@ function tryIt() {
 }
 
 //tryIt();
+
+//----- Notes and References
+
+// Can try out code on online with:
+// https://www.onlinegdb.com/online_javascript_rhino_interpreter
+
+// "Create a Proper Game Loop"
+// https://spicyyoghurt.com/tutorials/html5-javascript-game-development/create-a-proper-game-loop-with-requestanimationframe
+
+// Create Conway's Game of Life in Javascript
+// https://spicyyoghurt.com/tutorials/javascript/conways-game-of-life-canvas
