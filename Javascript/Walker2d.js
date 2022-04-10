@@ -1,12 +1,10 @@
 
-class LocationCount {
-    constructor(x, y, count) {
-        this.x = x;
-        this.y = y;
-        this.count = count;
-    }
-    key() {
-        return this.x + "," + this.y;
+function LocationCount(x, y, count) {
+    return {
+        x: x,
+        y: y,
+        count: count,
+        key: () => x + "," + y
     }
 }
 
@@ -37,29 +35,6 @@ function doStep(curLocations) {
     }
     return newLocations;
 }
-
-function tryIt() {
-    console.log("tryIt");
-
-    const GRID_WIDE = 250;
-    const GRID_HIGH = 250;
-    const TOTAL_PT_COUNT = 10;
-
-    const GRID_CENTER_X = GRID_WIDE / 2;
-    const GRID_CENTER_Y = GRID_HIGH / 2;
-
-    var locationCounts = new Map();
-    initialLocation = new LocationCount(GRID_CENTER_X, GRID_CENTER_Y, TOTAL_PT_COUNT);
-    locationCounts.set(initialLocation.key(), initialLocation);
-
-    for (let i=0; i < 5; i += 1) {
-        console.log(locationCounts);
-        locationCounts = doStep(locationCounts);
-        console.log(locationCounts);
-    }
-}
-
-//tryIt();
 
 //----- Notes and References
 

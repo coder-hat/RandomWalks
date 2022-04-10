@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Random Walking to Diffusion</title>
+</head>
 <body>
+    <canvas id="myCanvas" width="750" height="750" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
 
-<canvas id="myCanvas" width="750" height="750" style="border:1px solid #d3d3d3;">
-    Your browser does not support the HTML canvas tag.
-</canvas>
-<ul>
-<li>wide=<span id="gridWide"></span></li>
-<li>high=<span id="gridHigh"></span></li>
-<li>size=<span id="cellSize"></span></li>
-<li>count=<span id="gridCount"></span></li>
-</ul>
+    <ul>
+        <li>wide=<span id="gridWide"></span></li>
+        <li>high=<span id="gridHigh"></span></li>
+        <li>size=<span id="cellSize"></span></li>
+        <li>count=<span id="gridCount"></span></li>
+    </ul>
 
-<script src="Walker2d.js"></script>
-<script>
+    <script src="Walker2d.js"></script>
 
-const GRID_CELL_WIDE = 250;
-const GRID_CELL_HIGH = 250;
-const GRID_CENTER_X = GRID_CELL_WIDE / 2;
-const GRID_CENTER_Y = GRID_CELL_HIGH / 2;
-const PARTICLE_COUNT = 1024;
+    <script>
+        const GRID_CELL_WIDE = 250;
+        const GRID_CELL_HIGH = 250;
+        const GRID_CENTER_X = GRID_CELL_WIDE / 2;
+        const GRID_CENTER_Y = GRID_CELL_HIGH / 2;
+        const PARTICLE_COUNT = 1024;
 
-const CELL_SIZE_PIXELS = 3;
+        const CELL_SIZE_PIXELS = 3;
 
-function drawParticles(locationCounts, colorText) {
-    let c = document.getElementById("myCanvas");
-    let ctx = c.getContext("2d");
-    locationCounts.forEach((curLoc) => {
-        ctx.beginPath();
-        px = curLoc.x * CELL_SIZE_PIXELS;
-        py = curLoc.y * CELL_SIZE_PIXELS;
-        ctx.rect(px, py, CELL_SIZE_PIXELS, CELL_SIZE_PIXELS);
-        ctx.fillStyle = colorText;
-        ctx.fill();
-    });
-}
+        function drawParticles(locationCounts, colorText) {
+            let c = document.getElementById("myCanvas");
+            let ctx = c.getContext("2d");
+            locationCounts.forEach((curLoc) => {
+                ctx.beginPath();
+                px = curLoc.x * CELL_SIZE_PIXELS;
+                py = curLoc.y * CELL_SIZE_PIXELS;
+                ctx.rect(px, py, CELL_SIZE_PIXELS, CELL_SIZE_PIXELS);
+                ctx.fillStyle = colorText;
+                ctx.fill();
+            });
+        }
 
-function gameLoop(timeStamp) {
-    drawParticles(locationCounts, "white");
-    locationCounts = doStep(locationCounts);
-    drawParticles(locationCounts, "red");
+        function gameLoop(timeStamp) {
+            drawParticles(locationCounts, "white"); // important! must "undraw" current particle locations
+            locationCounts = doStep(locationCounts);
+            drawParticles(locationCounts, "red");
+            window.requestAnimationFrame(gameLoop);
+        }
 
-    window.requestAnimationFrame(gameLoop);
-}
+        var locationCounts = new Map();
+        initialLocation = new LocationCount(GRID_CENTER_X, GRID_CENTER_Y, PARTICLE_COUNT);
+        locationCounts.set(initialLocation.key(), initialLocation);
 
-var locationCounts = new Map();
-initialLocation = new LocationCount(GRID_CENTER_X, GRID_CENTER_Y, PARTICLE_COUNT);
-locationCounts.set(initialLocation.key(), initialLocation);
+        window.requestAnimationFrame(gameLoop);
 
-window.requestAnimationFrame(gameLoop);
-
-document.getElementById("gridWide").innerHTML = GRID_CELL_WIDE;
-document.getElementById("gridHigh").innerHTML = GRID_CELL_HIGH;
-document.getElementById("cellSize").innerHTML = CELL_SIZE_PIXELS;
-document.getElementById("gridCount").innerHTML = PARTICLE_COUNT;
-</script> 
-
+        document.getElementById("gridWide").innerHTML = GRID_CELL_WIDE;
+        document.getElementById("gridHigh").innerHTML = GRID_CELL_HIGH;
+        document.getElementById("cellSize").innerHTML = CELL_SIZE_PIXELS;
+        document.getElementById("gridCount").innerHTML = PARTICLE_COUNT;
+    </script> 
 </body>
 </html>
