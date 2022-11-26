@@ -36,6 +36,7 @@ if __name__ == "__main__":
     root.wm_attributes("-topmost", 1)
 
     canvas = tk.Canvas(root, width=GRID_COLS*CELL_DISPLAY_SIZE, height=GRID_ROWS*CELL_DISPLAY_SIZE, bd=0, highlightthickness=0)
+    canvas.configure(bg='white')
     canvas.pack()
 
     walkDisplay = TkWalker2d(canvas, "red")
